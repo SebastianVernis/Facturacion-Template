@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoFacturas - Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        .qr-code { font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 8px; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <i data-lucide="car" class="h-8 w-8 text-blue-600"></i>
+                    <span class="ml-2 text-xl font-bold text-gray-900">AutoFacturas</span>
+                </div>
+                <div class="flex space-x-8">
+                    <a href="#dashboard" class="inline-flex items-center px-1 pt-1 border-b-2 border-blue-500 text-sm font-medium text-gray-900">
+                        <i data-lucide="home" class="h-4 w-4 mr-2"></i>
+                        Dashboard
+                    </a>
+                    <a href="#clientes" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700">
+                        <i data-lucide="users" class="h-4 w-4 mr-2"></i>
+                        Clientes
+                    </a>
+                    <a href="#facturas" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700">
+                        <i data-lucide="file-text" class="h-4 w-4 mr-2"></i>
+                        Facturas
+                    </a>
+                    <a href="#repuve" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:text-gray-700">
+                        <i data-lucide="database" class="h-4 w-4 mr-2"></i>
+                        REPUVE
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div class="px-4 py-6 sm:px-0">
+            <!-- Header -->
+            <div class="mb-8 text-center">
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">🚗 AutoFacturas</h1>
+                <p class="text-xl text-gray-600 mb-2">Sistema de Facturación Automotriz</p>
+                <p class="text-lg text-blue-600">Con códigos QR que redirigen a datos de REPUVE</p>
+                <div class="mt-4 inline-flex items-center px-4 py-2 bg-green-100 text-green-800 rounded-lg">
+                    <i data-lucide="check-circle" class="h-5 w-5 mr-2"></i>
+                    ✅ Backend ejecutándose en localhost:3001
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-lg bg-blue-500">
+                            <i data-lucide="file-text" class="h-6 w-6 text-white"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Facturas</h3>
+                            <p class="text-2xl font-bold text-gray-900">12</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600">Facturas generadas con QR</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-lg bg-green-500">
+                            <i data-lucide="users" class="h-6 w-6 text-white"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Clientes</h3>
+                            <p class="text-2xl font-bold text-gray-900">8</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600">Clientes registrados</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-lg bg-purple-500">
+                            <i data-lucide="car" class="h-6 w-6 text-white"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Vehículos</h3>
+                            <p class="text-2xl font-bold text-gray-900">15</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600">En base REPUVE</p>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-lg bg-yellow-500">
+                            <i data-lucide="trending-up" class="h-6 w-6 text-white"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Ingresos</h3>
+                            <p class="text-2xl font-bold text-gray-900">$2.45M</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600">Total facturado</p>
+                </div>
+            </div>
+
+            <!-- Demo Sections -->
+            <div class="space-y-8">
+                <!-- REPUVE Demo -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-4 flex items-center">
+                        <i data-lucide="database" class="h-6 w-6 mr-3 text-blue-600"></i>
+                        Demo REPUVE
+                    </h2>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-900 mb-3">Ejemplo de consulta REPUVE:</h3>
+                            <div class="space-y-3">
+                                <div class="p-3 bg-gray-50 rounded-lg">
+                                    <p class="text-sm font-medium text-gray-700">VIN:</p>
+                                    <p class="font-mono text-lg">1HGBH41JXMN109186</p>
+                                </div>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div class="p-3 bg-gray-50 rounded-lg">
+                                        <p class="text-sm font-medium text-gray-700">Marca:</p>
+                                        <p class="text-lg">HONDA</p>
+                                    </div>
+                                    <div class="p-3 bg-gray-50 rounded-lg">
+                                        <p class="text-sm font-medium text-gray-700">Modelo:</p>
+                                        <p class="text-lg">CIVIC</p>
+                                    </div>
+                                </div>
+                                <div class="p-3 bg-green-50 border border-green-200 rounded-lg">
+                                    <div class="flex items-center">
+                                        <i data-lucide="check-circle" class="h-5 w-5 text-green-500 mr-2"></i>
+                                        <span class="text-green-700 font-medium">✓ VEHÍCULO REGISTRADO EN REPUVE</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h4 class="text-lg font-medium text-gray-900 mb-3">Código QR generado:</h4>
+                            <div class="qr-code inline-block text-center">
+                                <div class="text-4xl mb-2">📱</div>
+                                <p class="text-xs">QR apunta a:</p>
+                                <p class="text-xs text-blue-600 break-all">localhost:3001/api/repuve/1HGBH41JXMN109186</p>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-3">Escanea para ver datos completos del vehículo</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Factura Demo -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-4 flex items-center">
+                        <i data-lucide="file-text" class="h-6 w-6 mr-3 text-green-600"></i>
+                        Ejemplo de Factura Generada
+                    </h2>
+                    <div class="border border-gray-300 rounded-lg p-6 bg-gray-50">
+                        <div class="text-center mb-6">
+                            <h3 class="text-xl font-bold text-gray-900">AUTOMOTRIZ EJEMPLO SA DE CV</h3>
+                            <p class="text-sm text-gray-600">RFC: AEJ850101XXX</p>
+                            <p class="text-sm text-gray-600">Folio: FAC-2024001</p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <h4 class="font-medium text-gray-900 mb-2">Vehículo vendido:</h4>
+                                <div class="space-y-2">
+                                    <p><strong>Honda Civic 2021</strong></p>
+                                    <p class="text-sm text-gray-600">VIN: 1HGBH41JXMN109186</p>
+                                    <p class="text-green-600 font-medium">$125,000.00</p>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h4 class="font-medium text-gray-900 mb-2">QR REPUVE:</h4>
+                                <div class="qr-code inline-block">
+                                    <div class="text-2xl">🔗</div>
+                                    <p class="text-xs">QR integrado</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="border-t pt-4">
+                            <div class="text-right space-y-1">
+                                <p>Subtotal: $125,000.00</p>
+                                <p>IVA (16%): $20,000.00</p>
+                                <p class="text-lg font-bold">Total: $145,000.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API Status -->
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                    <h2 class="text-xl font-semibold text-blue-900 mb-3 flex items-center">
+                        <i data-lucide="server" class="h-5 w-5 mr-2"></i>
+                        Estado del Sistema
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="text-center">
+                            <div class="text-2xl mb-2">🟢</div>
+                            <p class="font-medium text-blue-900">Backend API</p>
+                            <p class="text-sm text-blue-700">localhost:3001</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl mb-2">🗄️</div>
+                            <p class="font-medium text-blue-900">Base de Datos</p>
+                            <p class="text-sm text-blue-700">SQLite inicializada</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl mb-2">📋</div>
+                            <p class="font-medium text-blue-900">Datos REPUVE</p>
+                            <p class="text-sm text-blue-700">3 vehículos ejemplo</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instructions -->
+                <div class="bg-gray-100 rounded-lg p-6">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-3">🚀 Para usar la aplicación completa:</h2>
+                    <ol class="space-y-2 text-gray-700">
+                        <li><strong>1.</strong> Backend ya ejecutándose en localhost:3001</li>
+                        <li><strong>2.</strong> Para frontend React: <code class="bg-gray-200 px-2 py-1 rounded">cd frontend && npm install && npm start</code></li>
+                        <li><strong>3.</strong> Visitar: <a href="http://localhost:3000" class="text-blue-600 underline">http://localhost:3000</a></li>
+                        <li><strong>4.</strong> Probar páginas REPUVE: <a href="http://localhost:3001/api/repuve/1HGBH41JXMN109186" class="text-blue-600 underline">Ejemplo VIN</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t mt-12">
+        <div class="max-w-7xl mx-auto py-6 px-4 text-center">
+            <p class="text-gray-600">
+                AutoFacturas - Sistema de Facturación Automotriz con códigos QR REPUVE
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        
+        // Simular conexión a API
+        setTimeout(() => {
+            console.log('✅ Demo cargado correctamente');
+            console.log('🔧 Backend API corriendo en puerto 3001');
+            console.log('📊 Base de datos SQLite inicializada');
+            console.log('📱 Códigos QR apuntan a localhost:3001/api/repuve/{VIN}');
+        }, 1000);
+    </script>
+</body>
+</html>

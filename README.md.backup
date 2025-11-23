@@ -1,0 +1,35 @@
+# 🚗 AutoFacturas - Sistema de Facturación Automotriz
+
+Aplicación web para generar facturas de agencias automotrices con códigos QR que redirigen a datos de REPUVE (Registro Público Vehicular).
+
+## 📍 Ubicación Actual
+```
+/home/sebastianvernis/autofacturas-app/
+```
+
+## Características
+
+- Generación de facturas en PDF
+- Códigos QR con redirección a datos REPUVE locales
+- Gestión de clientes y vehículos
+- Base de datos local de REPIVE
+- Interfaz web responsive
+
+## Estructura del Proyecto
+
+```
+facturacion-automotriz/
+├── frontend/          # React.js frontend
+├── backend/           # Node.js/Express API
+├── database/          # Base de datos y scripts
+└── docs/             # Documentación
+```
+
+## Tecnologías
+
+- Frontend: React.js + Tailwind CSS
+- Backend: Node.js + Express
+- Base de datos: SQLite
+- QR: qrcode.js
+- PDF: jsPDF
+- REPUVE: Datos locales en JSON/SQLite
