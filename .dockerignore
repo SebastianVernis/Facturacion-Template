@@ -1,0 +1,27 @@
+node_modules
+npm-debug.log
+.git
+.gitignore
+README.md
+.env
+.DS_Store
+*.log
+
+# Frontend
+frontend/node_modules
+frontend/build
+frontend/.env
+
+# Landing
+landing/node_modules
+landing/build
+landing/.env
+
+# Backend
+backend/node_modules
+backend/database.db
+backend/*.log
+
+# Videos and temp files
+videos/
+.blackbox/

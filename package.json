@@ -1,0 +1,37 @@
+{
+  "name": "autofacturas-monorepo",
+  "version": "1.0.0",
+  "description": "Sistema de Facturación Automotriz - Monorepo completo",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install && cd ../landing && npm install",
+    "build:backend": "cd backend && npm install --production",
+    "build:frontend": "cd frontend && npm install && npm run build",
+    "build:landing": "cd landing && npm install && npm run build",
+    "build:all": "npm run build:backend && npm run build:frontend && npm run build:landing",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm start",
+    "start:landing": "cd landing && npm start",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm start",
+    "dev:landing": "cd landing && npm start",
+    "prod:backend": "cd backend && NODE_ENV=production npm start",
+    "prod:serve": "node production-server.js",
+    "init:db": "cd backend && npm run init-db && npm run init-landing-db",
+    "deploy:build": "npm run build:all && npm run init:db",
+    "test:health": "curl http://localhost:3001/api/health && curl http://localhost:3000 && curl http://localhost:3002"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "compression": "^1.7.4",
+    "helmet": "^7.0.0",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

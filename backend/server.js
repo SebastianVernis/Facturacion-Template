@@ -380,6 +380,14 @@ app.get('/api/demo-requests', (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Servidor ejecutándose en puerto ${PORT}`);
-});
+// Solo iniciar servidor si no está siendo importado
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`✓ Backend API ejecutándose en puerto ${PORT}`);
+    console.log(`✓ Entorno: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`✓ Base de datos: ${process.env.DATABASE_PATH || './database.db'}`);
+  });
+}
+
+// Exportar app para uso en production-server.js
+module.exports = app;
