@@ -256,6 +256,130 @@ app.get('/api/repuve/:vin', (req, res) => {
   });
 });
 
+// ==================== LANDING PAGE ENDPOINTS ====================
+
+// Endpoint para solicitudes de suscripción
+app.post('/api/subscriptions', (req, res) => {
+  const { plan, company, name, email, phone, message, billingCycle } = req.body;
+  const id = uuidv4();
+  
+  db.run(
+    `INSERT INTO subscriptions (id, plan, company, name, email, phone, message, billing_cycle, status) 
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [id, plan, company, name, email, phone, message || '', billingCycle || 'monthly', 'pending'],
+    function(err) {
+      if (err) {
+        console.error('Error al crear suscripción:', err.message);
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      res.json({ 
+        id, 
+        message: 'Solicitud de suscripción recibida exitosamente',
+        status: 'success'
+      });
+    }
+  );
+});
+
+// Endpoint para solicitudes de integración personalizada
+app.post('/api/integration-requests', (req, res) => {
+  const { 
+    company, 
+    name, 
+    email, 
+    phone, 
+    infrastructureType, 
+    currentSystem, 
+    vehiclesPerMonth, 
+    users, 
+    requirements, 
+    timeline 
+  } = req.body;
+  const id = uuidv4();
+  
+  db.run(
+    `INSERT INTO integration_requests 
+     (id, company, name, email, phone, infrastructure_type, current_system, 
+      vehicles_per_month, users, requirements, timeline, status) 
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [
+      id, company, name, email, phone, infrastructureType, 
+      currentSystem || '', vehiclesPerMonth || '', users || '', 
+      requirements, timeline || '', 'pending'
+    ],
+    function(err) {
+      if (err) {
+        console.error('Error al crear solicitud de integración:', err.message);
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      res.json({ 
+        id, 
+        message: 'Solicitud de integración recibida exitosamente',
+        status: 'success'
+      });
+    }
+  );
+});
+
+// Endpoint para solicitudes de demo
+app.post('/api/demo-requests', (req, res) => {
+  const { company, name, email, phone, companySize, message } = req.body;
+  const id = uuidv4();
+  
+  db.run(
+    `INSERT INTO demo_requests (id, company, name, email, phone, company_size, message, status) 
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+    [id, company, name, email, phone, companySize || '', message || '', 'pending'],
+    function(err) {
+      if (err) {
+        console.error('Error al crear solicitud de demo:', err.message);
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      res.json({ 
+        id, 
+        message: 'Solicitud de demo recibida exitosamente',
+        status: 'success'
+      });
+    }
+  );
+});
+
+// Endpoint para obtener todas las suscripciones (admin)
+app.get('/api/subscriptions', (req, res) => {
+  db.all('SELECT * FROM subscriptions ORDER BY created_at DESC', (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json(rows);
+  });
+});
+
+// Endpoint para obtener todas las solicitudes de integración (admin)
+app.get('/api/integration-requests', (req, res) => {
+  db.all('SELECT * FROM integration_requests ORDER BY created_at DESC', (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json(rows);
+  });
+});
+
+// Endpoint para obtener todas las solicitudes de demo (admin)
+app.get('/api/demo-requests', (req, res) => {
+  db.all('SELECT * FROM demo_requests ORDER BY created_at DESC', (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json(rows);
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Servidor ejecutándose en puerto ${PORT}`);
 });
